@@ -36,4 +36,27 @@ const playerChoice = "scissors";
  }
  
  
- console.log(playRound(playerChoice,computerChoice));
+ function game(){
+    let computerScore = 0;
+    let playerScore = 0;
+    let result;
+
+    for(let i = 0; i < 5; i++){
+        result = playRound(playerChoice,computerChoice);
+        console.log(result);
+
+        result.includes("lose!") ? computerScore++ : playerScore++;
+
+    }
+
+    if(computerScore > playerScore){
+        console.log("You lose!");
+    }else{
+        console.log("You win!")
+    }
+
+}
+
+
+
+game();
