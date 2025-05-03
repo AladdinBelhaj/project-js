@@ -1,14 +1,12 @@
 function getComputerChoice(){
     let probability = (Math.random() * 100).toFixed(2);
-    let choice;
     if (probability<=33.33){
-        choice = "rock"
+        return "rock"
     }else if(probability<=66.66){
-        choice = "paper";
+        return "paper";
     }else{
-        choice = "scissors";
+        return "scissors";
     }
-    return choice;
 }
 
 
