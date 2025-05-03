@@ -1,3 +1,11 @@
+
+const btns = document.querySelectorAll('button');
+
+btns.forEach(btn =>{
+    btn.addEventListener('click',playRound);
+});
+
+
 function getComputerChoice(){
     let probability = (Math.random() * 100).toFixed(2);
     if (probability<=33.33){
@@ -10,42 +18,22 @@ function getComputerChoice(){
 }
 
 
-const btns = document.querySelectorAll('button');
- let playerChoice;
- 
- btns.forEach(btn =>{
-     btn.addEventListener('click',getPlayerChoice);
- });
-
-function getPlayerChoice(){
-    console.log(this.id);
-     playerChoice = this.id;
-     console.log(playerChoice);
+ function playRound(){
+    const computerChoice = getComputerChoice();
+    const playerChoice = this.id;
+    if(playerChoice == computerChoice){
+        console.log(`Draw!`);
+    }else if(playerChoice=="rock" && computerChoice=="scissors"){
+        console.log(`You win! Rock beats scissors!`);
+    }else if(playerChoice=="scissors" && computerChoice=="paper"){
+        console.log(`You win! Scissors beat paper!`);
+    }else if(playerChoice=="paper" && computerChoice=="rock"){
+        console.log(`You win! Paper beats rock!`);
+    }else if(computerChoice=="rock" && playerChoice=="scissors"){
+        console.log(`You lose! Rock beats scissors!`);
+    }else if(computerChoice=="scissors" && playerChoice=="paper"){
+        console.log(`You lose! Scissors beat paper!`);
+    }else if(computerChoice=="paper" && playerChoice=="rock"){
+        console.log(`You lose! Paper beats rock!`);
+    }
 }
-
-
-
-
- const computerChoice = getComputerChoice();
- 
- function playRound(playerChoice,computerChoice){
-    playerChoice = playerChoice.toLowerCase();
- 
-     if(playerChoice == computerChoice){
-         return `Draw!`;
-     }else if(playerChoice=="rock" && computerChoice=="scissors"){
-         return `You win! Rock beats scissors!`;
-     }else if(playerChoice=="scissors" && computerChoice=="paper"){
-         return `You win! Scissors beat paper!`;
-     }else if(playerChoice=="paper" && computerChoice=="rock"){
-         return `You win! Paper beats rock!`;
-     }else if(computerChoice=="rock" && playerChoice=="scissors"){
-         return `You lose! Rock beats scissors!`;
-     }else if(computerChoice=="scissors" && playerChoice=="paper"){
-         return `You lose! Scissors beat paper!`;
-     }else if(computerChoice=="paper" && playerChoice=="rock"){
-         return `You lose! Paper beats rock!`;
-     }
- 
- }
- 
