@@ -14,14 +14,22 @@
 </head>
 <body>
 
-
     <h1>Rock Paper Scissors</h1>
 
-    <div>
+
+    <div id="container">
+
+    </div>
+
+    <div class="scoreBoard">
         <div class="left-side">
             <span>Your score:</span>
             <span id="playerScoreTab"></span>
         </div>
+        <div class="middle">
+            <span id="result"></span>
+        </div>
+
         <div class="right-side">
             <span>CPU score:</span>
             <span id ="computerScoreTab"></span>
@@ -29,21 +37,19 @@
     </div>
 
 
-    <div id="container">
-
+    <div class="buttons">
+            <img src="img/rock-btn.png" id="rock" alt="rock">
+            <img src="img/paper-btn.png" id="paper" alt="paper">
+            <img src="img/scissors-btn.png" id="scissors" alt="scissors">
+        <span id="playAgain" class="end">Play Again?</span>
     </div>
+    
 
 
-    <button id="rock">rock</button>
-    <button id="paper">paper</button>
-    <button id="scissors">scissors</button>
-
-    <div class = "info">
-        
-    </div>
-
-
-
+    <div class="footer">
+    <span>
+        &copy;Aladdin Belhaj 2023
+    </span></div>
 
 </body>
 </html>
