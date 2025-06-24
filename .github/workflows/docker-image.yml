@@ -24,4 +24,4 @@ jobs:
 
 
     - name: Push image to Docker Hub
-      run: docker push "aladdin02/{$IMAGE_NAME}:latest"
+      run: docker push "aladdin02/${IMAGE_NAME}:latest"
