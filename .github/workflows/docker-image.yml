@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  IMAGE_NAME: rps
+  
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: |
+        cd front
+        docker build . --file Dockerfile --tag $IMAGE_NAME:$(date +%s)
+
+    - name: Push image to Docker Hub
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+    - name: Push image to Docker Hub
+      run: docker push "aladdin02/{$IMAGE_NAME}:latest"
