@@ -29,14 +29,17 @@ jobs:
     - name: Push image to Docker Hub
       run: docker push "aladdin02/${IMAGE_NAME}:latest"
 
-    - name: Connect via SSH and deploy
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        script: |
-          sudo -n docker pull aladdin02/rps:latest
-          sudo -n docker stop rps || true && docker rm rps || true
-          sudo -n docker run --name rps -p 8080:80 aladdin02/rps:latest
+    - name: Setup SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Run remote deployment
+      run: |
+        ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USERNAME }}@${{ secrets.SERVER_HOST }} <<EOF
+          sudo docker pull aladdin02/rps:latest
+          sudo docker stop rps || true && sudo docker rm rps || true
+          sudo docker run -d --name rps -p 80:80 aladdin02/rps:latest
+        EOF
