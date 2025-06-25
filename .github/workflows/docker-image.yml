@@ -28,3 +28,15 @@ jobs:
 
     - name: Push image to Docker Hub
       run: docker push "aladdin02/${IMAGE_NAME}:latest"
+
+    - name: Connect via SSH and deploy
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          docker pull aladdin02/rps:latest
+          docker stop rps || true && docker rm rps || true
+          docker run -d --name rps -p 80:80 aladdin02/rps:latest
