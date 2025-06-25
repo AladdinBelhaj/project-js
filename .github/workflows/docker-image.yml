@@ -38,7 +38,7 @@ jobs:
 
     - name: Run remote deployment
       run: |
-        ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USERNAME }}@${{ secrets.SERVER_HOST }} <<EOF
+        ssh -i ~/.ssh/id_ed25519 ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} <<EOF
           sudo docker pull aladdin02/rps:latest
           sudo docker stop rps || true && sudo docker rm rps || true
           sudo docker run -d --name rps -p 80:80 aladdin02/rps:latest
