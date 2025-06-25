@@ -37,6 +37,6 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          sudo docker pull aladdin02/rps:latest
-          sudo docker stop rps || true && docker rm rps || true
-          sudo docker run --name rps -p 8080:80 aladdin02/rps:latest
+          sudo -n docker pull aladdin02/rps:latest
+          sudo -n docker stop rps || true && docker rm rps || true
+          sudo -n docker run --name rps -p 8080:80 aladdin02/rps:latest
