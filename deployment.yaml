@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rps-deployment
+  labels:
+    app: rps
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rps
+  template:
+    metadata:
+      labels:
+        app: rps
+    spec:
+      containers:
+      - name: rps
+        image: aladdin02/k8s:v1
+        ports:
+        - containerPort: 80
